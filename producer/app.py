@@ -3,9 +3,9 @@ from services import validate_body_data
 from producer import produce_email_data
 
 app = Flask(__name__)
+app.debug = True
 
-
-print("the server started")  # to remove
+print("the producer server started")
 
 @app.route('/api/email', methods=[ 'POST'])
 def listen_to_email():
@@ -21,4 +21,8 @@ def listen_to_email():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(
+        host='0.0.0.0',
+        port=5000,
+        debug=True
+    )

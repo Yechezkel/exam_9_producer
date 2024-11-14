@@ -1,7 +1,5 @@
 version: '3'
 
-
-
 services:
 
   zookeeper:
@@ -29,8 +27,19 @@ services:
 
 
   producer_server:
-    build: .
+    build: ./producer
     container_name: producer_server
+    ports:
+      - "5000:5000"
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+  streams_server:
+    build: ./streams
+    container_name: streams_server
+    ports:
+      - "5001:5001"
     depends_on:
       kafka:
         condition: service_healthy

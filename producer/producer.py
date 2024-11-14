@@ -10,6 +10,7 @@ TOPIK_NAME = "try"
 
 
 def produce_email_data(data):
-    PRODUCER.send(TOPIK_NAME, data)
     print("Message produced")
+    PRODUCER.send(TOPIK_NAME, data)
+
 
