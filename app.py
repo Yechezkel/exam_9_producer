@@ -5,6 +5,8 @@ from producer import produce_email_data
 app = Flask(__name__)
 
 
+print("the server started")  # to remove
+
 @app.route('/api/email', methods=[ 'POST'])
 def listen_to_email():
     data = request.get_json()
