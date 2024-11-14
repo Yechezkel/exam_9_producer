@@ -35,6 +35,21 @@ services:
       kafka:
         condition: service_healthy
 
+
+  mongo-db:
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    container_name:
+      mongo-db
+    volumes:
+      - ./mongo-data:/data/db
+    healthcheck:
+      test: [ "CMD", "mongo", "--eval", "db.adminCommand('ping')" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   streams_server:
     build: ./streams
     container_name: streams_server
@@ -43,6 +58,10 @@ services:
     depends_on:
       kafka:
         condition: service_healthy
+      mongo-db:
+        condition: service_healthy
+
+
 
 
 volumes:
